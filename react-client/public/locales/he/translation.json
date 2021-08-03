@@ -1,0 +1,15 @@
+{
+  "subscribe": "הירשם",
+  "follow": "עקוב",
+  "creators": "מאור יצקן | עדן אדרי",
+  "consulting": "ייעוץ זוגי",
+  "title": "שלום בית",
+  "slogan": "לא מוותרים בקלות",
+  "sections": {
+    "quiz": "שאלון",
+    "lectures": "הרצאות",
+
+    "blog": "בלוג",
+    "consulting": "ייעוץ זוגי"
+  }
+}
