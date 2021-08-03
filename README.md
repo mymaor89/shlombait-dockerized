@@ -20,3 +20,4 @@ Dockerized MERN stack developement environment
     - Stop containers and removes volumes:  Run `docker-compose down -v`
 
 
+# mern-dockerized
