@@ -10,8 +10,8 @@ function Copyright() {
   const { t } = useTranslation();
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © 2020 "}
-      <Link color="inherit" href="https://material-ui.com/">
+      {"Copyright © 2021 "}
+      <Link color="inherit">
         {t("creators")}
       </Link>{" "}
     </Typography>
