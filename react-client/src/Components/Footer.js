@@ -10,7 +10,7 @@ function Copyright() {
   const { t } = useTranslation();
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © 2021 "}
+      {"Copyright © 2021"}
       <Link color="inherit">
         {t("creators")}
       </Link>{" "}
