@@ -14,8 +14,6 @@ export default function App() {
   const sections = [
     { title: "quiz", url: "/quiz" },
     { title: "lectures", url: "/lectures" },
-    { title: "login", url: "/login" },
-    { title: "signup", url: "/signup" },
     { title: "forum", url: "/forum" },
     { title: "consulting", url: "/consulting" }
   ];

@@ -50,9 +50,12 @@ export default function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
+        <RouterLink
+            to="/login">
         <Button variant="outlined" size="small">
-          {t("subscribe")}
+          {t("login")}
         </Button>
+        </RouterLink>
       </Toolbar>
       <Toolbar
         component="nav"

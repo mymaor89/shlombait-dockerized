@@ -1,9 +1,10 @@
-import React from 'react';
-import { Field } from 'redux-form';
-import Form from '../shared/form/Form';
-import renderField from '../shared/form/renderField';
-import { usernameValidator, passwordValidator } from '../../util/validators';
-import SubmitButton from '../shared/form/SubmitButton';
+import React from "react";
+import { Field } from "redux-form";
+import Form from "../shared/form/Form";
+import renderField from "../shared/form/renderField";
+import { usernameValidator, passwordValidator } from "../../util/validators";
+import SubmitButton from "../shared/form/SubmitButton";
+import { Link as RouterLink } from "react-router-dom";
 
 class LoginForm extends React.Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class LoginForm extends React.Component {
   }
 
   redirectIfLoggedIn() {
-    if (this.props.token) this.props.history.push('/');
+    if (this.props.token) this.props.history.push("/");
   }
 
   onSubmit = ({ username, password }) => {
@@ -24,26 +25,28 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Form
-        loading={this.props.loading}
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-      >
-        <Field
-          name='username'
-          label='username'
-          type='text'
-          component={renderField}
-          validate={usernameValidator}
-        />
-        <Field
-          name='password'
-          label='password'
-          type='password'
-          component={renderField}
-          validate={passwordValidator}
-        />
-        <SubmitButton type='submit'>log in</SubmitButton>
-      </Form>
+        <Form
+          loading={this.props.loading}
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+        >
+          <Field
+            name="username"
+            label="username"
+            type="text"
+            component={renderField}
+            validate={usernameValidator}
+          />
+          <Field
+            name="password"
+            label="password"
+            type="password"
+            component={renderField}
+            validate={passwordValidator}
+          />
+          <SubmitButton type="submit">log in</SubmitButton>
+          <RouterLink to="/signup">Not registered? Sign up</RouterLink>
+        </Form>
+
     );
   }
 }

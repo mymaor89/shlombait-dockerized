@@ -4,7 +4,7 @@ import Form from '../shared/form/Form';
 import renderField from '../shared/form/renderField';
 import { usernameValidator, passwordValidator } from '../../util/validators';
 import SubmitButton from '../shared/form/SubmitButton';
-
+import { Link as RouterLink } from "react-router-dom";
 class SignupForm extends React.Component {
   componentDidMount() {
     this.redirectIfLoggedIn();
@@ -49,6 +49,7 @@ class SignupForm extends React.Component {
           component={renderField}
         />
         <SubmitButton type='submit'>sign up</SubmitButton>
+        <RouterLink to="/login">Already registered? Login</RouterLink>
       </Form>
     );
   }
