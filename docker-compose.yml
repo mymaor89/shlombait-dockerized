@@ -13,7 +13,7 @@ services:
   server:
     build: ./express-server
     ports:
-      - 3001:3000
+      - 5000:5000
     volumes:
       - ./express-server:/usr/src/backend-app
       - node_modules_b:/usr/src/backend-app/node_modules
@@ -26,6 +26,9 @@ services:
       - data:/data/db
     ports:
       - "27017:27017"
+    command: --quiet
+
+
 
 volumes: 
   node_modules:

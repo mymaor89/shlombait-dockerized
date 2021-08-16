@@ -1,18 +1,17 @@
 var createError = require('http-errors');
+require("dotenv").config({ path: ".env" });
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const errorHandler = require('./middleware/error')
 
 const bodyParser = require('body-parser');
-
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
-
+app.use(cors());
+app.options('*', cors());
 var mongoDB = 'mongodb://mongo:27017/myDB';
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
@@ -43,17 +42,10 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin","*");
   res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept",
   );
   if(req.method === 'OPTIONS'){
       res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, UPDATE, DELETE, PATCH');
@@ -61,24 +53,24 @@ app.use((req, res, next) => {
   }
   next()
 });
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.get("/", (req, res, next) => {
+  res.send("Api running");
 });
+
+// Connecting Routes
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/private", require("./routes/private"));
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(errorHandler);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.send('error');
-});
 
+// const server = app.listen(PORT, () =>
+//   console.log(`Sever running on port ${PORT}`)
+// );
+
+// process.on("unhandledRejection", (err, promise) => {
+//   console.log(`Logged Error: ${err.message}`);
+//   server.close(() => process.exit(1));
+// });
 module.exports = app;
