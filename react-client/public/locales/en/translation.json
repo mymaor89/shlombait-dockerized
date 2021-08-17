@@ -1,5 +1,6 @@
 {
   "login": "login",
+  "logout": "logout",
   "follow": "follow",
   "creators": "Maor Yatskan | Eden Edri",
   "sections": {

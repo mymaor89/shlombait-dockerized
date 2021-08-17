@@ -11,27 +11,30 @@ import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbarTitle: {
-    flex: 1
+    flex: 1,
   },
   toolbarSecondary: {
     justifyContent: "space-between",
-    overflowX: "auto"
+    overflowX: "auto",
   },
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
     color: "inherit",
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 }));
 
 export default function Header(props) {
   const classes = useStyles();
   const { t } = useTranslation();
   const { sections } = props;
+  function logout(){
+    localStorage.removeItem("authToken")
+  }
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
@@ -50,12 +53,19 @@ export default function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <RouterLink
-            to="/login">
-        <Button variant="outlined" size="small">
-          {t("login")}
-        </Button>
-        </RouterLink>
+        {localStorage.getItem("authToken") ? (
+          <RouterLink to="/">
+          <Button variant="outlined" size="small" onClick={logout}>
+            {t("logout")}
+          </Button>
+          </RouterLink>
+        ) : (
+          <RouterLink to="/login">
+            <Button variant="outlined" size="small">
+              {t("login")}
+            </Button>
+          </RouterLink>
+        )}
       </Toolbar>
       <Toolbar
         component="nav"
@@ -80,5 +90,5 @@ export default function Header(props) {
 
 Header.propTypes = {
   sections: PropTypes.array,
-  title: PropTypes.string
+  title: PropTypes.string,
 };

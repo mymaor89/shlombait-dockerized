@@ -1,6 +1,7 @@
 import "./Consulting.css";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Maor from "./maor.jpg";
 class Consulting extends React.Component {
   render() {
     return (
@@ -14,7 +15,7 @@ class Consulting extends React.Component {
                   <div className="member-details">
                     <div>
                       <img
-                        src="http://gocheckers.com/images/roster/andrew_poturalski_headshot_1718.png"
+                        src={Maor}
                         alt="UI Designer"
                       />
                       <div className="member-info">
@@ -42,12 +43,13 @@ class Consulting extends React.Component {
             {/* /end col-md-8 */}
             <div className="pull-left col-md-4 sm-text-center">
               <div className="team-overview">
-                <h2>מי אנחנו</h2>
+                <h2>לעזאזל מי אנחנו</h2>
                 <div>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Adipisci quae nesciunt officia! Autem, nam eum voluptatem,
-                  esse voluptatibus deleniti tempora laboriosam sequi pariatur,
-                  explicabo itaque. Fuga, deserunt? Repudiandae, neque qui.
+                  בוגרי תואר להנדסת תוכנה במכללת סמי שמעון אשדוד.
+                  החלטנו להקים את האתר לשיקום הזוגיות מאחר וזו מטרה חשובה לשלמות החברה ורווחתה.
+                  לאחר חיפוש אחר אתרים אחרים בנושא, גילינו כי אין מענה הולם בחרנו להרים את הכפפה.
+                  האתר עדיין נמצא בשלבי פיתוח שבסיומו תקבלו דרכים יצירתיות לשקם ולפתח את הזוגיות שלכם.
+                  בהצלחה!
                 </div>
                 <p />
               </div>

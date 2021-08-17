@@ -43,6 +43,7 @@ export default function App() {
             path="/passwordreset/:resetToken"
             component={ResetPasswordScreen}
           />
+          <Route path="*" component={Blog} />
         </Switch>
         <Route path="/" render={(props) => <Footer {...props} />} />
       </div>
