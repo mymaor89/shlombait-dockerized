@@ -13,10 +13,10 @@ import ResetPasswordScreen from "./Components/screens/ResetPasswordScreen";
 
 export default function App() {
   const sections = [
-    { title: "blog", url: "/blog" },
+    { title: "home", url: "/home" },
     { title: "quiz", url: "/quiz" },
     { title: "lectures", url: "/lectures" },
-    { title: "forum", url: "/forum" },
+   /*  { title: "forum", url: "/forum" }, */
     { title: "consulting", url: "/consulting" },
   ];
   return (
@@ -27,7 +27,7 @@ export default function App() {
           render={(props) => <Header {...props} sections={sections} />}
         />
         <Switch>
-          <Route path="/blog" component={Blog} />
+          <Route path="/home" component={Blog} />
           <Route path="/quiz" component={Quiz} />
           <Route path="/lectures" component={Lectures} />
           <Route path="/consulting" component={Consulting} />
