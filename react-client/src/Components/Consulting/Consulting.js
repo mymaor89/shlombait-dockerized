@@ -1,25 +1,56 @@
 import "./Consulting.css";
-import React from "react";
+import React,{ useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Maor from "./maor.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import clsx from 'clsx';
+import axios from "axios";
+
+const base_url = process.env.BACKEND_URL || "http://localhost:5000";
+
+const Consulting = ({ history }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const contactUshandler = async (e) => {
+    e.preventDefault();
+
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
 
 
+    try {
+      const { data } = await axios.post(
+        `${base_url}/api/contact`,
+        {
+          name,
+          email,
+          message,
+        },
+        config
+      );
 
-class Consulting extends React.Component {
-  state = {
-    name: "",
-    email: "",
-    message: "",
+      history.push("/");
+    } catch (error) {
+      setError(error.response.data.error);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
   };
-  updateInputValue(e) {
-    let new_state = this.state;
-    new_state[e.target.id] = e.target.value;
-    this.setState({ new_state });
-  }
-  render() {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
+
+
+
     return (
       <div>
         <div className="container">
@@ -29,23 +60,23 @@ class Consulting extends React.Component {
                 {/* single member row starts */}
                 <li className="clearfix">
                   <div className="member-details">
-                    <div>
-                      <img src={Maor} alt="UI Designer" />
+                    <div>                      
+                      <img src="https://media.easy.co.il/images/UserThumbs/10066337_1580297666249.jpg" alt="UI Designer" />
                       <div className="member-info">
-                        <h3>Maor Yatskan</h3>
-                        <p>Programmer</p>
+                        <h3>מיכאל בוקובזה</h3>
+                        <p>יועץ זוגי</p>
                       </div>
                     </div>
                   </div>
                   <div className="member-details">
                     <div>
                       <img
-                        src="https://axis.org/wp-content/uploads/2014/10/chris-headshot.png"
+                        src="https://www.pandaclinic.co.il/wp-content/uploads/%D7%A2%D7%A0%D7%91%D7%9C-%D7%A8%D7%95%D7%99%D7%98%D7%9E%D7%9F.jpg"
                         alt="UI Designer"
                       />
                       <div className="member-info">
-                        <h3>Eden Edri</h3>
-                        <p>UI Designer</p>
+                        <h3>ענבל מיכאלי</h3>
+                        <p>יועצת זוגית</p>
                       </div>
                     </div>
                   </div>
@@ -53,12 +84,12 @@ class Consulting extends React.Component {
               </ul>
               {/* /end team-photos */}
             </div>
-            {/* /end col-md-8 */}
+            {/* /end col-md-8 */} 
             <div className="pull-left col-md-4 sm-text-center">
               <div className="team-overview">
                 <h2> מי אנחנו</h2>
                 <div>
-                  בוגרי תואר להנדסת תוכנה במכללת סמי שמעון אשדוד. החלטנו להקים
+                  יועצים זוגיים בעלי ניסיון רב,  החלטנו להקים
                   את האתר לשיקום הזוגיות מאחר וזו מטרה חשובה לשלמות החברה
                   ורווחתה. לאחר חיפוש אחר אתרים אחרים בנושא, גילינו כי אין מענה
                   הולם בחרנו להרים את הכפפה. האתר עדיין נמצא בשלבי פיתוח שבסיומו
@@ -73,10 +104,8 @@ class Consulting extends React.Component {
         </div>
         {/* /end container */}
         <div className="contact-us">
-          <form
-            /* onSubmit={registerHandler} */ className="contact-us__form"
-          >
-            <h1 className="contact-us__title">Contact us</h1>
+          <form  onSubmit={contactUshandler}  className="contact-us__form">
+  <h1 className="contact-us__title">Contact us</h1>
             <div className="form-group">
               <label htmlFor="name">Name:</label>
               <input
@@ -84,8 +113,8 @@ class Consulting extends React.Component {
                 required
                 id="name"
                 placeholder="Enter name"
-                value={this.state.name}
-                onChange={(evt) => this.updateInputValue(evt)}
+                value={name}
+            onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -95,8 +124,8 @@ class Consulting extends React.Component {
                 required
                 id="email"
                 placeholder="Email address"
-                value={this.state.email}
-                onChange={(evt) => this.updateInputValue(evt)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group" className="root">
@@ -109,8 +138,8 @@ class Consulting extends React.Component {
                 rows={4}
                 fullWidth
                 defaultValue="Enter message"
-                value={this.state.message}
-                onChange={(evt) => this.updateInputValue(evt)}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
             <button type="submit" className="btn btn-primary">
@@ -120,6 +149,5 @@ class Consulting extends React.Component {
         </div>
       </div>
     );
-  }
 }
 export default Consulting;

@@ -58,9 +58,9 @@ app.get("/", (req, res, next) => {
 });
 
 // Connecting Routes
+app.use("/api/contact", require("./routes/contact"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
-
 // error handler
 app.use(errorHandler);
 

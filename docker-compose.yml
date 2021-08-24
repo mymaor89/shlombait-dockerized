@@ -8,7 +8,10 @@ services:
     volumes: 
       - ./react-client:/usr/src/app
       - node_modules:/usr/src/app/node_modules
-      
+    depends_on: 
+      - server
+    networks:
+      - frontend
 
   server:
     build: ./express-server
@@ -19,6 +22,9 @@ services:
       - node_modules_b:/usr/src/backend-app/node_modules
     depends_on: 
       - mongo
+    networks:
+      - frontend
+      - backend
 
   mongo:
     image: mongo
@@ -27,7 +33,8 @@ services:
     ports:
       - "27017:27017"
     command: --quiet
-
+    networks:
+      - backend
 
 
 volumes: 
@@ -35,7 +42,9 @@ volumes:
   node_modules_b:
   data:
     
-
+networks:
+  frontend:
+  backend:
 
   
 
