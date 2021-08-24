@@ -12,6 +12,8 @@ import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
+    
+
   },
   toolbarTitle: {
     flex: 1,
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     color: "inherit",
     textDecoration: "none",
+    textTransform: "uppercase",
   },
 }));
 
