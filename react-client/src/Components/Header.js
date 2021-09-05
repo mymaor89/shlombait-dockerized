@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,11 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import LanguageSelector from "./LanguageSelector";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
+import {fetchUsername} from './apicalls';
+
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    
-
   },
   toolbarTitle: {
     flex: 1,
@@ -32,16 +32,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header(props) {
+  const [username, setUsername] = useState("guest");
+  const [error, setError] = useState("");
   const classes = useStyles();
   const { t } = useTranslation();
   const { sections } = props;
-  function logout(){
-    localStorage.removeItem("authToken")
+
+
+  useEffect(() => {
+    fetchUsername(setUsername,setError);
+  }, []);
+
+  function logout() {
+    localStorage.removeItem("authToken");
+    setUsername("guest");
   }
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">{t("follow")}</Button>
+        <Button size="small">
+          Hello, {username}
+        </Button>
         <LanguageSelector />
         <Typography
           component="h2"
@@ -58,9 +69,9 @@ export default function Header(props) {
         </IconButton>
         {localStorage.getItem("authToken") ? (
           <RouterLink to="/">
-          <Button variant="outlined" size="small" onClick={logout}>
-            {t("logout")}
-          </Button>
+            <Button variant="outlined" size="small" onClick={logout}>
+              {t("logout")}
+            </Button>
           </RouterLink>
         ) : (
           <RouterLink to="/login">
