@@ -1,0 +1,23 @@
+services:
+  client:
+    build:
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./react-client:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    # Due to stupid react-scripts bug still present in v3.4.3
+    # https://github.com/facebook/create-react-app/issues/8688
+    stdin_open: true
+
+  server:
+    build:
+        dockerfile: ./Dockerfile.dev
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./express-server:/usr/src/backend-app
+      - node_modules_b:/usr/src/backend-app/node_modules
