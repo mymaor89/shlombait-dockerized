@@ -6,7 +6,7 @@ const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const base_url = process.env.BACKEND_URL || 'http://localhost:5000';
+  const base_url = 'http://35.207.89.38:5000';
 
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();

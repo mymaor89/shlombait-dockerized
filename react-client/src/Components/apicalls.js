@@ -1,5 +1,5 @@
 import axios from "axios";
-const base_url = process.env.BACKEND_URL || "http://localhost:5000";
+const base_url = 'http://35.207.89.38:5000';
 
 export const fetchUsername = async (setUsername,setError) => {
     const config = {
