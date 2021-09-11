@@ -5,9 +5,8 @@ import Maor from "./maor.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import { contactus } from "../../util/api";
 
-// const base_url = 'http://35.207.89.38:5000';
+const base_url = 'http://35.207.89.38:5000';
 
 const Consulting = ({ history }) => {
   const [name, setName] = useState("");
@@ -18,24 +17,24 @@ const Consulting = ({ history }) => {
   const contactUshandler = async (e) => {
     e.preventDefault();
 
-    // const config = {
-    //   header: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
 
 
     try {
-      // const { data } = await axios.post(
-      //   `${base_url}/api/contact`,
-      //   {
-      //     name,
-      //     email,
-      //     message,
-      //   },
-      //   config
-      // );
-      const data = await contactus(name,email,message)
+      const { data } = await axios.post(
+        `${base_url}/api/contact`,
+        {
+          name,
+          email,
+          message,
+        },
+        config
+      );
+
       history.push("/");
     } catch (error) {
       setError(error.response.data.error);

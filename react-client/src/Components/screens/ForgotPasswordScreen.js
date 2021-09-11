@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordScreen.css";
-import {methods} from "../../util/api"
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const base_url = 'http://35.207.89.38:5000';
 
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
 
-    // const config = {
-    //   header: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
 
     try {
-      // const { data } = await axios.post(
-      //   `${base_url}/api/auth/forgotpassword`,
-      //   { email },
-      //   config
-      // );
-      const data  = await methods.post('auth/forgotpassword', { email});
+      const { data } = await axios.post(
+        `${base_url}/api/auth/forgotpassword`,
+        { email },
+        config
+      );
+
       setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);

@@ -1,23 +1,21 @@
 import axios from "axios";
-import {user} from "../util/api"
+const base_url = 'http://35.207.89.38:5000';
 
 export const fetchUsername = async (setUsername,setError) => {
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    //   },
-    // };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    };
 
     try {
-      // const {data} = await axios.post(
-      //   `${base_url}/api/auth/username`,
-      //   {},
-      //   config
-      // );
-      // const {data}  = await methods.post('auth/username', {});
-      // console.log(`user: ${data.username}`);
-      const data = await user();
+      const {data} = await axios.post(
+        `${base_url}/api/auth/username`,
+        {},
+        config
+      );
+      console.log(`user: ${data.username}`);
       setUsername(data.username);
     } catch (error) {
       setError("You are not authorized please login");

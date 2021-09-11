@@ -1,24 +1,23 @@
 import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import "./PrivateScreen.css";
-import {methods} from "../../util/api"
 
 const PrivateScreen = () => {
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
+  const base_url = 'http://35.207.89.38:5000';
   
   useEffect(() => {
     const fetchPrivateDate = async () => {
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      //   },
-      // };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      };
 
       try {
-        // const { data } = await axios.get(`${base_url}/api/private`, config);
-        const {data}  = await methods.get('private');
+        const { data } = await axios.get(`${base_url}/api/private`, config);
         setPrivateData(data.data);
       } catch (error) {
         localStorage.removeItem("authToken");
