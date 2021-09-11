@@ -1,11 +1,11 @@
 import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import "./PrivateScreen.css";
+import { base_url } from '../../util/api'
 
 const PrivateScreen = () => {
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
-  const base_url = 'http://35.207.89.38:5000';
   
   useEffect(() => {
     const fetchPrivateDate = async () => {

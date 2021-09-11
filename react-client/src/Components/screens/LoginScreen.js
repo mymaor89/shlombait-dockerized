@@ -2,12 +2,12 @@ import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LoginScreen.css";
+import { base_url } from '../../util/api'
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const base_url = 'http://35.207.89.38:5000';
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
       history.push("/");
