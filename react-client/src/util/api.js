@@ -1,9 +1,10 @@
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080/api'
-    : `https://${window.location.hostname}/api`;
+// const baseUrl =
+//   process.env.NODE_ENV === 'development'
+//     ? 'http://localhost:8080/api'
+//     : `https://${window.location.hostname}/api`;
+const baseUrl = 'http://192.168.1.23:5000/api'
 
-const methods = {
+export const methods = {
   get: async function (endpoint, token = null) {
     const options = {
       method: 'GET',
@@ -68,14 +69,36 @@ const methods = {
 };
 
 export async function login (username, password) {
-  const json = await methods.post('login', { username, password });
-  return json.token;
+  const json = await methods.post('auth/login', { username, password });
+  return json;
 }
 
-export async function signup (username, password) {
-  const json = await methods.post('register', { username, password });
-  return json.token;
+export async function register (username, email, password) {
+  const json = await methods.post('auth/register', { username,email, password });
+  return json;
 }
+
+export async function passwordreset (password) {
+  const json = await methods.post(`auth/passwordreset/${match.params.resetToken}`, {password });
+  return json;
+}
+
+export async function forgotpassword (email) {
+  const json = await methods.post('auth/forgotpassword', { email });
+  return json;
+}
+
+export async function user () {
+  const json = await methods.post('auth/username', {  });
+  return json;
+}
+
+export async function contactus (name,email,message) {
+  const json = await methods.post('contact', { name,email,message });
+  return json;
+}
+
+
 
 export async function getPosts (category) {
   return await methods.get(`posts/${category}`);

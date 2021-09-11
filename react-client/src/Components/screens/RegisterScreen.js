@@ -1,7 +1,8 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
+import { register } from "../../util/api";
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -9,16 +10,15 @@ const RegisterScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const base_url = 'http://35.207.89.38:5000';
 
   const registerHandler = async (e) => {
     e.preventDefault();
 
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   header: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
 
     if (password !== confirmpassword) {
       setPassword("");
@@ -30,16 +30,16 @@ const RegisterScreen = ({ history }) => {
     }
 
     try {
-      const { data } = await axios.post(
-        `${base_url}/api/auth/register`,
-        {
-          username,
-          email,
-          password,
-        },
-        config
-      );
-
+      // const { data } = await axios.post(
+      //   `${base_url}/api/auth/register`,
+      //   {
+      //     username,
+      //     email,
+      //     password,
+      //   },
+      //   config
+      // );
+      const data = await register(username,email,password)
       localStorage.setItem("authToken", data.token);
 
       history.push("/");

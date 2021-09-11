@@ -1,4 +1,4 @@
-import { login, signup } from '../util/api';
+import { login, register } from '../util/api';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -29,7 +29,7 @@ const signupError = error => ({ type: SIGNUP_ERROR, error });
 export const attemptSignup = (username, password) => async dispatch => {
   dispatch(signupRequest);
   try {
-    const token = await signup(username, password);
+    const token = await register(username, password);
     dispatch(signupSuccess(token));
   } catch (error) {
     dispatch(signupError(error));

@@ -1,7 +1,7 @@
 import React,{ useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import {methods} from "../../util/api"
 import "./ResetPasswordScreen.css";
 
 const ResetPasswordScreen = ({ history, match }) => {
@@ -9,16 +9,16 @@ const ResetPasswordScreen = ({ history, match }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const base_url = 'http://35.207.89.38:5000';
+  const base_url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}`;
 
   const resetPasswordHandler = async (e) => {
     e.preventDefault();
 
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   header: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
 
     if (password !== confirmPassword) {
       setPassword("");
@@ -30,15 +30,15 @@ const ResetPasswordScreen = ({ history, match }) => {
     }
 
     try {
-      const { data } = await axios.put(
-        `${base_url}/api/auth/passwordreset/${match.params.resetToken}`,
-        {
-          password,
-        },
-        config
-      );
-
-      console.log(data);
+      // const { data } = await axios.put(
+      //   `${base_url}/api/auth/passwordreset/${match.params.resetToken}`,
+      //   {
+      //     password,
+      //   },
+      //   config
+      // );
+      //const {data}  = await methods.post(`auth/passwordreset/${match.params.resetToken}`, { password });
+      const data = await passwordreset(password)
       setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);

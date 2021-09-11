@@ -2,12 +2,13 @@ import React,{ useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LoginScreen.css";
+import {login} from "../../util/api"
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const base_url = 'http://35.207.89.38:5000';
+
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
       history.push("/");
@@ -24,12 +25,13 @@ const LoginScreen = ({ history }) => {
     };
 
     try {
-      const { data } = await axios.post(
-        `${base_url}/api/auth/login`,
-        { email, password },
-        config
-      );
-
+      // const { data } = await axios.post(
+      //   `${base_url}/api/auth/login`,
+      //   { email, password },
+      //   config
+      // );
+      //const {data}  = await methods.post('auth/login', { email, password });
+      const data = await login(email,password)
       localStorage.setItem("authToken", data.token);
 
       history.push("/");
