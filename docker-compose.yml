@@ -26,13 +26,12 @@ services:
       - data:/data/db
     ports:
       - 27017:27017
-    command: --quiet
+    command: mongod --quiet --logpath /dev/null 
     networks:
       - backend
 
 
 volumes:
-  nginx:
   node_modules:
   node_modules_b:
   data:
