@@ -2,11 +2,13 @@ FROM node:latest as builder
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install --production
+RUN npm install -g serve
 COPY . .
 RUN npm run build
+CMD ["serve", "-s", "build" ,"-l","3000"]
 
-FROM nginx
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+# FROM nginx
+# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/conf.d/
+# EXPOSE 8080
+# CMD ["nginx", "-g", "daemon off;"]

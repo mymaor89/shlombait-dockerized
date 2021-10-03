@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordScreen.css";
+import { base_url } from '../../util/api'
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const base_url = process.env.BACKEND_URL || 'http://localhost:5000';
+
 
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();

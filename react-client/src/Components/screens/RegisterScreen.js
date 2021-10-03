@@ -2,6 +2,7 @@ import React,{ useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
+import { base_url } from '../../util/api'
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ const RegisterScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const base_url = process.env.BACKEND_URL || 'http://localhost:5000';
+  
 
   const registerHandler = async (e) => {
     e.preventDefault();

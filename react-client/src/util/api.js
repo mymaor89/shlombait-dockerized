@@ -1,7 +1,4 @@
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080/api'
-    : `https://${window.location.hostname}/api`;
+export const base_url ="http://192.168.1.23:5000"
 
 const methods = {
   get: async function (endpoint, token = null) {
@@ -12,7 +9,7 @@ const methods = {
       }
     };
 
-    const response = await fetch(`${baseUrl}/${endpoint}`, options);
+    const response = await fetch(`${base_url}/${endpoint}`, options);
     const json = await response.json();
 
     if (!response.ok) throw Error(json.message);
@@ -30,7 +27,7 @@ const methods = {
       body: JSON.stringify(body)
     };
 
-    const response = await fetch(`${baseUrl}/${endpoint}`, options);
+    const response = await fetch(`${base_url}/${endpoint}`, options);
     const json = await response.json();
 
     if (!response.ok) {
@@ -55,7 +52,7 @@ const methods = {
       }
     };
 
-    const response = await fetch(`${baseUrl}/${endpoint}`, options);
+    const response = await fetch(`${base_url}/${endpoint}`, options);
     const json = await response.json();
 
     if (!response.ok) {

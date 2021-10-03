@@ -5,8 +5,7 @@ import Maor from "./maor.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-
-const base_url = process.env.BACKEND_URL || "http://localhost:5000";
+import { base_url } from '../../util/api'
 
 const Consulting = ({ history }) => {
   const [name, setName] = useState("");
