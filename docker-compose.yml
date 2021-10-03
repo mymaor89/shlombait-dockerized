@@ -31,7 +31,8 @@ services:
       - backend
 
 
-volumes: 
+volumes:
+  nginx:
   node_modules:
   node_modules_b:
   data:
